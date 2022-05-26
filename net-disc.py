@@ -34,32 +34,22 @@ nmap_text = 'nmap-text.txt'
 print('Running nmap scan...')
 
 with open(nmap_text,'w') as data:
-    sp.run(['sudo', 'nmap', '-sV', ipTarget, '-O'], stdout=data, text=True)
+    sp.run(['sudo', 'nmap', '-sV', '-O', ipTarget], stdout=data, text=True)
 
 with open(nmap_text,'r') as data:
     display = data.read()
 
 print(display)
 
+'''
+print("Do you want to exploit the target?")
+ans = input('Yes or No: ')
 
+if ans == 'Yes':
+    print('Okay let\'s exploit')
+'''
 
+#sp.run(['sudo', 'msfdb', 'init'], stdout=sp.PIPE, text=True)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#sp.run(['searchsploit', 'ssh'], stdout=sp.PIPE, text=True)
 
