@@ -31,6 +31,9 @@ ipTarget = input('Enter target IP for nmap: ')
 
 nmap_text = 'nmap-text.txt'
 
+print('Run a fast nmap scan')
+print(sp.run(['sudo', 'nmap', '-F', ipTarget], stdout=sp.PIPE, text=True))
+
 print('Running nmap scan...')
 
 with open(nmap_text,'w') as data:
