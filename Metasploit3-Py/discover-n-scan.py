@@ -40,19 +40,17 @@ def ipAddr():
     cmdOutputToFile(CMD, FILE)
     printFile(FILE)
     
-def discoverMyNet():
-    print('Preparing to discover...')
-    ipRange = input('Enter IP range: ')
+def discoverMyNet(ip_range):
+    FILE = 'discovered-nets.txt'
+    CMD = ['sudo', 'netdiscover', '-r', ip_range, '-P']
     print('Discovering networks...')
- 
+    cmdOutputToFile(CMD, FILE)
+    printFile(FILE)
 
-def writeToFile(file, ip_range):
-    with open(file, 'w') as data:
-        sp.run(['sudo', 'netdiscover', '-r', ip_range, '-P'], stdout=data, text=True)
-
-def readFromFile(file):
-    with open(file, 'r') as data:
-        display = data.read()
-    return display
+def nmapFastScan(ip_target):
+    FILE = 'nmap-scan.txt'
+    CMD = []
 
 ipAddr()
+ipTarget = input('Enter ip target: ')
+discoverMyNet(ipTarget)
