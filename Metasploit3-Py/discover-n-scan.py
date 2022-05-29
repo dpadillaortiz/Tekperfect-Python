@@ -47,10 +47,27 @@ def discoverMyNet(ip_range):
     cmdOutputToFile(CMD, FILE)
     printFile(FILE)
 
-def nmapFastScan(ip_target):
-    FILE = 'nmap-scan.txt'
-    CMD = []
+def nmapFastScan(ip_range):
+    FILE = 'nmap-fast-scan.txt'
+    CMD = ['sudo', 'nmap', '-F', ip_range]
+    print('Running a fast scan...')
+    cmdOutputToFile(CMD, FILE)
+    printFile(FILE)
+
+def nmapSlowScan(ip_target):
+    FILE = 'nmap-slow-scan.txt'
+    CMD = ['sudo', 'nmap', '-sV', '-O', ip_target]
+    print('Running slow scan...')
+    cmdOutputToFile(CMD, FILE)
+    printFile(FILE)
+
+
 
 ipAddr()
+ipRange = input('Enter ip range: ')
+discoverMyNet(ipRange)
+print('Using previous ip range for fast scan.')
+nmapFastScan(ipRange)
 ipTarget = input('Enter ip target: ')
-discoverMyNet(ipTarget)
+nmapSlowScan(ipTarget)
+
