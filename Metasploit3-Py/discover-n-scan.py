@@ -3,9 +3,8 @@
 
 import subprocess as sp
 
-DISCOVER_FILE = 'discover-networks.txt'
-NMAP_FILE = 'nmap-recon.txt'
-
+DISCOVER_FILE = 'Console-Output/discover-networks.txt'
+NMAP_FILE = 'Console-Output/nmap-recon.txt'
 '''
     1. Need to know my IP address
         a. Use `ip address` to find out
@@ -34,28 +33,28 @@ def printFile(file):
 
 
 def ipAddr():
-    FILE = 'ip-address.txt'
+    FILE = 'Console-Output/ip-address.txt'
     CMD = ['ip', 'address']
     print('Grabbing IP information...')
     cmdOutputToFile(CMD, FILE)
     printFile(FILE)
     
 def discoverMyNet(ip_range):
-    FILE = 'discovered-nets.txt'
+    FILE = 'Console-Output/discovered-nets.txt'
     CMD = ['sudo', 'netdiscover', '-r', ip_range, '-P']
     print('Discovering networks...')
     cmdOutputToFile(CMD, FILE)
     printFile(FILE)
 
 def nmapFastScan(ip_range):
-    FILE = 'nmap-fast-scan.txt'
+    FILE = 'Console-Output/nmap-fast-scan.txt'
     CMD = ['sudo', 'nmap', '-F', ip_range]
     print('Running a fast scan...')
     cmdOutputToFile(CMD, FILE)
     printFile(FILE)
 
 def nmapSlowScan(ip_target):
-    FILE = 'nmap-slow-scan.txt'
+    FILE = 'Console-Output/nmap-slow-scan.txt'
     CMD = ['sudo', 'nmap', '-sV', '-O', ip_target]
     print('Running slow scan...')
     cmdOutputToFile(CMD, FILE)
