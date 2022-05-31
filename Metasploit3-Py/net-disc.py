@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-
 import subprocess as sp
 
 file = 'test.txt'
@@ -44,15 +43,4 @@ with open(nmap_text,'r') as data:
 
 print(display)
 
-'''
-print("Do you want to exploit the target?")
-ans = input('Yes or No: ')
-
-if ans == 'Yes':
-    print('Okay let\'s exploit')
-'''
-
-#sp.run(['sudo', 'msfdb', 'init'], stdout=sp.PIPE, text=True)
-
-#sp.run(['searchsploit', 'ssh'], stdout=sp.PIPE, text=True)
 
