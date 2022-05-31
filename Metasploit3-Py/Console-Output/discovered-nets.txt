@@ -1,8 +1,0 @@
- _____________________________________________________________________________
-   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
- -----------------------------------------------------------------------------
- 192.168.0.1     3c:84:6a:0c:cf:52      1      60  TP-LINK TECHNOLOGIES CO.,LTD.
- 192.168.0.1     90:9a:4a:31:6a:76      1      60  TP-LINK TECHNOLOGIES CO.,LTD.
- 192.168.0.202   48:65:ee:18:fd:04      1      60  IEEE Registration Authority
-
--- Active scan completed, 3 Hosts found.
