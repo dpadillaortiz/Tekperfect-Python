@@ -1,32 +1,4 @@
-#! /usr/bin/python3
-
-# Math Formulas
-
-# Pythagoreom Theorem
-# c^2 = a^2 + b^2
-# -> c = sqrt(a^2 + b^2)
-
-aSide = 5
-bSide = 6
-aBSide = aSide**2 + bSide**2
-
-cSide = aBSide**(1/2)
-
-print(cSide)
-
-# Slope 
-# Slope = (y2 - y1)/(x2 - x1) = rise/run
-
-xPoint1 = 6
-xPoint2 = 10
-
-yPoint1 = 3
-yPoint2 = 5
-
-rise = yPoint2 - yPoint1
-run = xPoint2 - xPoint1
-
-slope = rise/run
+#!/usr/bin/python3
 
 
 # What if we wanted to do this for multiple inputs?
