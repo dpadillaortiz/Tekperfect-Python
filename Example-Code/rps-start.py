@@ -3,6 +3,7 @@
 # Introduce Modules
 # - don't reinvent the wheel
 # - useful tools
+# - useful to look at documentation
 
 import random
 
@@ -14,9 +15,12 @@ options = ['rock', 'paper', 'scissors']
 # Start with if/elif/else statements
 
 # talk about methods
+# take a look at the documentation on input()
 myChoice = input('Choose your option: ').lower()
+
 # Add an assert here for myChoice
-    
+
+# Take a look at documentation for random
 botChoice = random.choice(options)
 
 # talk about string formatting
