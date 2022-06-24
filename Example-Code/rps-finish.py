@@ -14,6 +14,8 @@ print('Type "exit" to exit the game.')
 options = ['rock', 'paper', 'scissors']
 
 # Introduce Control Flow
+# - loops --> for, while
+# Will use while loop since we can decide when to end the loop
 
 while True:
     # talk about methods
