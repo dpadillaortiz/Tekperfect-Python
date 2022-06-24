@@ -23,6 +23,7 @@ def pythm(a,b):
 # - checks to test that a condition is met
 # - if not, raises an AssertionError with optional msg
 def slopeFormula(cord1, cord2):
+   # Circle back to operators -> comparison
    assert type(cord1) == type(()) and type(cord2) == type(()), 'Expected a tuple'
    
    # unpacking a tuple 

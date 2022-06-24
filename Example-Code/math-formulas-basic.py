@@ -17,7 +17,7 @@
 aSide = 5
 bSide = 6
 
-# Math operations with python
+# Introduce operators -> Math operations with python
 aBSide = aSide**2 + bSide**2
 
 cSide = aBSide**(1/2)

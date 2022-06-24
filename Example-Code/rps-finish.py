@@ -1,12 +1,14 @@
 #! /usr/bin/python3
 
 # Introduce Modules
-- don't reinvent the wheel
-- useful tools
+# - don't reinvent the wheel
+# - useful tools
 
 import random
 
 print('Lets play rock, paper, scissors!')
+
+# Now we want a way out
 print('Type "exit" to exit the game.')
 
 options = ['rock', 'paper', 'scissors']
@@ -16,6 +18,7 @@ options = ['rock', 'paper', 'scissors']
 while True:
     # talk about methods
     myChoice = input('Choose your option: ').lower()
+    # assert statement for myChoice or use if-statement
     
     if myChoice == 'exit':
         # Talk about break, continue, pass
@@ -27,7 +30,7 @@ while True:
 
     win = 'You win!'
     
-    What are your conditions to win? lose? tie?
+    # What are your conditions to win? lose? tie?
     if myChoice == 'rock' and botChoice == 'scissors':
         print(win)
     elif myChoice == 'paper' and botChoice == 'rock':
