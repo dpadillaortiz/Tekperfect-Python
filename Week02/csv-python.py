@@ -21,30 +21,39 @@ def csvModule():
       csvFile = csv.reader(f)
       for row in csvFile:
          print(row)
-
-# Pass one of the sample csvs
-# Using python to print the file
+'''
+Task: Create function that will read and print a csv from Sample-CSV 
+- Pass one of the sample csvs with sys argv
+- Print csv and remove any empty rows
+'''
 def printFile(file):
-   with open(FILE, 'r') as csvFile:
+   with open(file, 'r') as csvFile:
       csvData = csv.reader(csvFile)
       for row in csvData:
          if len(row) > 1:
             print(row)
 
+# printFile(FILE)
 
 '''
 ['   41', '    9', '   35', ' "N"', '     81', '   14', '   23', ' "W"', ' "Ravenna"', ' OH ']
 
 This is the current output. We need to clean up the extra spaces.
-'''
 
+Task: Remove the extra spacing from the start and end of each item
+- Clean up any additional fluff
+'''
 def cleanOutput(file):
-   with open(FILE, newline='') as csvFile:
+   with open(file, newline='') as csvFile:
       csvData = csv.reader(csvFile)
       for row in csvData:
+         if len(row) <= 1:
+            continue
          for i in range(len(row)):
             row[i] = row[i].strip().strip('"')
          print(row)
+
+#cleanOutput(FILE)
 
 '''
 ['133', '145', '26', '7', '3', '1', '42', '0.36', '3059']
@@ -52,24 +61,43 @@ def cleanOutput(file):
 This output has been cleaned up. Let's change it so that it writes to a file
 '''
 
-def loopThru(data):
+def loopThru(row):
    newRow = []
-   for i in range(len(data)):
-      newRow.append(data[i].strip())
+   for i in range(len(row)):
+      if len(row) <= 1:
+         print('yo')
+         continue
+      newRow.append(row[i].strip().strip('"'))
    return newRow
 
-        
+def loopThruCSV(csvFile):
+   cleanRow = []
+   for row in csvFile:
+      if len(row) <= 1:
+         continue
+      for i in range(len(row)):
+         cleanRow.append(row[i].strip().strip('"'))
+      return cleanRow
+   
+
 def cleanToFile(clean, output):
    with open(clean, 'r') as csvRead:
       with open(output, 'w') as csvWrite:
       
          csvToClean = csv.reader(csvRead)
+         ctcLength = len(csvRead.readlines())
          csvToWrite = csv.writer(csvWrite)
+         
+         for row in range(ctcLength):
+            cleanRow = loopThruCSV(csvToClean)   
+            print(cleanRow)
+            #csvToWrite.writerow(cleanRow)
 
+'''
          for row in csvToClean:
-            if len(row) == 1:
+            if len(row) <= 1:
                continue
             print(loopThru(row))
             csvToWrite.writerow(loopThru(row))  
- 
-
+'''
+cleanToFile(FILE, 'test.csv')
