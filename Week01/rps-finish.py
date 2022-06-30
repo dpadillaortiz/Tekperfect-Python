@@ -1,9 +1,5 @@
 #! /usr/bin/python3
 
-# Introduce Modules
-# - don't reinvent the wheel
-# - useful tools
-
 import random
 
 print('Lets play rock, paper, scissors!')
@@ -13,26 +9,27 @@ print('Type "exit" to exit the game.')
 
 options = ['rock', 'paper', 'scissors']
 
-# Introduce Control Flow
-# - loops --> for, while
-# Will use while loop since we can decide when to end the loop
-
 while True:
-    # talk about methods
     myChoice = input('Choose your option: ').lower()
-    # assert statement for myChoice or use if-statement
-    
+    '''
+    This condition will stop the loop. It has to go above the 
+    continue condition otherwise you will not be able to exit
+    '''
     if myChoice == 'exit':
-        # Talk about break, continue, pass
+        print('Thank you for playing')
         break
-
+    
+    if myChoice not in options:
+        print('Your options are: rock, paper, scissors.')
+        continue
+    
+  
     botChoice = random.choice(options)
 
     print(f'The computer chose: {botChoice}')
 
     win = 'You win!'
     
-    # What are your conditions to win? lose? tie?
     if myChoice == 'rock' and botChoice == 'scissors':
         print(win)
     elif myChoice == 'paper' and botChoice == 'rock':

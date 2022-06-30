@@ -1,9 +1,10 @@
 #! /usr/bin/python3
-
-# Introduce Modules
-# - don't reinvent the wheel
-# - useful tools
-# - useful to look at documentation
+'''
+Introduce Modules
+- don't reinvent the wheel
+- useful tools
+- useful to look at documentation
+'''
 
 import random
 
@@ -11,24 +12,23 @@ print('Lets play rock, paper, scissors!')
 
 options = ['rock', 'paper', 'scissors']
 
-# Introduce Control Flow
-# Start with if/elif/else statements
-
-# talk about methods
-# take a look at the documentation on input()
+'''
+Intro to Methods
+- take a look at the documentation on input()
+- Take a look at documentation for random
+'''
 myChoice = input('Choose your option: ').lower()
-
-# Add an assert here for myChoice
-
-# Take a look at documentation for random
 botChoice = random.choice(options)
 
-# talk about string formatting
 print(f'The computer chose: {botChoice}')
 
 win = 'You win!'
-    
-# What are your conditions to win? lose? tie?
+
+'''
+Introduce Control Flow
+- We've been using one typ, sequencial
+- Now we have decision/branching i.e. if/elif/else
+'''
 if myChoice == 'rock' and botChoice == 'scissors':
    # Why print over return?
    print(win)
