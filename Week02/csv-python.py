@@ -82,11 +82,4 @@ def cleanToFile(clean, output):
             print(cleanRow)
             csvToWrite.writerow(cleanRow)
 
-'''
-         for row in csvToClean:
-            if len(row) <= 1:
-               continue
-            print(loopThru(row))
-            csvToWrite.writerow(loopThru(row))  
-'''
 cleanToFile(FILE, 'test.csv')
