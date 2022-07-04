@@ -62,22 +62,10 @@ This output has been cleaned up. Let's change it so that it writes to a file
 '''
 
 def loopThru(row):
-   newRow = []
-   for i in range(len(row)):
-      if len(row) <= 1:
-         print('yo')
-         continue
-      newRow.append(row[i].strip().strip('"'))
-   return newRow
-
-def loopThruCSV(csvFile):
    cleanRow = []
-   for row in csvFile:
-      if len(row) <= 1:
-         continue
-      for i in range(len(row)):
-         cleanRow.append(row[i].strip().strip('"'))
-      return cleanRow
+   for i in range(len(row)):
+      cleanRow.append(row[i].strip().strip('"'))
+   return cleanRow
    
 
 def cleanToFile(clean, output):
@@ -85,13 +73,14 @@ def cleanToFile(clean, output):
       with open(output, 'w') as csvWrite:
       
          csvToClean = csv.reader(csvRead)
-         ctcLength = len(csvRead.readlines())
          csvToWrite = csv.writer(csvWrite)
          
-         for row in range(ctcLength):
-            cleanRow = loopThruCSV(csvToClean)   
+         for row in csvToClean:
+            if len(row) <= 1:
+               continue
+            cleanRow = loopThru(row)
             print(cleanRow)
-            #csvToWrite.writerow(cleanRow)
+            csvToWrite.writerow(cleanRow)
 
 '''
          for row in csvToClean:
