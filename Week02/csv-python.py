@@ -82,4 +82,4 @@ def cleanToFile(clean, output):
             print(cleanRow)
             csvToWrite.writerow(cleanRow)
 
-cleanToFile(FILE, 'test.csv')
+cleanToFile(FILE, 'clean-data.csv')
