@@ -56,20 +56,7 @@ def email(user):
    email = f'{user}@tekperfect.com'
    return email
 
-def name():
-   OUTPUT = 'Output-CSV/fullname.csv'
-   with open(INPUT,'r') as r:
-      with open(OUTPUT,'w') as w:
-         csvReader = csv.reader(r)
-         csvWriter = csv.writer(w)
-    
-         for index, row in enumerate(csvReader):
-            if index == 0:
-               csvWriter.writerow(row)
-            else:
-               csvWriter.writerow(row+[fullname(row[0], row[1])])
-
-def emp_data():
+def employee():
    OUTPUT = 'Output-CSV/fullname.csv' 
    with open(INPUT,'r') as r:
       with open(OUTPUT,'w') as w:
@@ -85,12 +72,49 @@ def emp_data():
             else:
                csvWriter.writerow(row + [name, user, mail])
    
-emp_data()
+'''
+FILTER funciton
+Syntax: =FILTER(array, include, if empty)
+'''
+def withinBudget(budget):
+   if budget == 'Yes':
+      print(budget)
 
-# VLOOKUP function
+def availableRooms(rooms):
+   desiredRooms = 3
+   if rooms <= desiredRooms:
+      return True
 
-# UNIQUE function
+def budgetFilter():
+   with open(INPUT,'r') as r:
+      csvReader = csv.reader(r)
+      for index,row in enumerate(csvReader):
+         if index == 0:
+            continue
+         if row[7] == 'Yes':
+            print(row)   
+         
+budgetFilter()
 
-# FILTER funciton
+def myFilter():
+   with open(INPUT,'r') as r:
+      csvReader = csv.reader(r)
+      for index, row in enumerate(csvReader):
+         if index == 0:
+            continue
+         if availableRooms(int(row[2])):
+            print(row)
+            
+myFilter()
+
+
+
+
+
+
+
+
+
+
 
 
