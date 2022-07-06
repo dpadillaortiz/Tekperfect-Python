@@ -67,6 +67,7 @@ def loopThru(row):
       cleanRow.append(row[i].strip().strip('"'))
    return cleanRow
    
+OUTPUT = f'Output-CSV/{sys.argv[2]}'
 
 def cleanToFile(clean, output):
    with open(clean, 'r') as csvRead:
@@ -82,4 +83,4 @@ def cleanToFile(clean, output):
             print(cleanRow)
             csvToWrite.writerow(cleanRow)
 
-cleanToFile(FILE, 'clean-data.csv')
+cleanToFile(FILE, OUTPUT)
