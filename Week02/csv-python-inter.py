@@ -17,7 +17,7 @@ def simpleWrite():
       writeToCSV.writerow([1,2,3,4,5,6,7])
 
 INPUT = f'Input-CSV/{sys.argv[1]}'
-OUTPUT = f'Input-CSV/{sys.argv[2]}'
+OUTPUT = f'Output-CSV/{sys.argv[2]}'
 
 '''
 IF function
@@ -104,13 +104,13 @@ def availableRooms(rooms):
    if rooms <= desiredRooms:
       return True
 
-def budgetFilter():
+def budgetFilter(withinBudget):
    with open(INPUT,'r') as r:
       csvReader = csv.reader(r)
       for index,row in enumerate(csvReader):
          if index == 0:
             continue
-         if row[7] == 'Yes':
+         if withinBudget == 'Yes':
             print(row)   
          
 def myFilter():
@@ -127,7 +127,7 @@ if __name__ == '__main__':
    print('Adding the budget column')
    withinBudget(200000)
    print('Houses under my budget')
-   budgetFilter()
+   #budgetFilter()
    print('Houses with 3 rooms or less')
    myFilter()
 
