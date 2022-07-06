@@ -3,19 +3,21 @@
 import sys
 import csv
 
-CSV_FILE = f'Sample-CSV/{sys.argv[1]}'
-
 '''
-Default
+Simple csv writer
 - how to write a row to a csv
 - use 'a' to append to the file
 - using 'w' will overwrite the file contents
 '''
 
 def simpleWrite():
+   CSV_FILE = f'Sample-CSV/{sys.argv[1]}'  
    with open(CSV_FILE, 'a') as csvfile:
       writeToCSV = csv.writer(csvfile)
       writeToCSV.writerow([1,2,3,4,5,6,7])
+
+INPUT = f'Input-CSV/{sys.argv[1]}'
+OUTPUT = f'Input-CSV/{sys.argv[2]}'
 
 '''
 IF function
@@ -24,8 +26,7 @@ Syntax: =IF(logical test, value if true, value if false)
 zillow.csv has 7 headers
 '''
 def budget(budget):
-   OUTPUT = 'Output-CSV/budget.csv'
-   with open(CSV_FILE, 'r') as f:
+   with open(INPUT, 'r') as f:
       with open(OUTPUT, 'w') as c:
          csvReader = csv.reader(f)
          csvWriter = csv.writer(c)
@@ -38,11 +39,30 @@ def budget(budget):
             else:
                csvWriter.writerow(row + ['No'])
 
+def budget(price, budget):
+   if int(price) <= budget:
+      return True
+
+def withinBudget(budget):
+   with open(INPUT, 'r') as r:
+      with open(OUTPUT, 'w') as w:
+         csvReader = csv.reader(f)
+         csvWriter = csv.writer(c)
+         for row in csvReader:
+            if 'Index' in row:
+               csvWriter.writerow(row + ['Within Budget'])
+               continue
+            if budget(row[6], budget):
+               csvWriter.writerow(row + ['Yes'])
+            else:
+               csvWriter.writerow(row + ['No'])
+
+
+
 '''
 CONCATENATE function
 Syntax: =CONCATENATE(text1, text2, ...)
 '''
-INPUT = f'Output-CSV/{sys.argv[1]}'
 
 def fullname(first, last):
    fullname = f'{first} {last}'
@@ -57,7 +77,6 @@ def email(user):
    return email
 
 def employee():
-   OUTPUT = 'Output-CSV/fullname.csv' 
    with open(INPUT,'r') as r:
       with open(OUTPUT,'w') as w:
          csvReader = csv.reader(r)
@@ -94,8 +113,6 @@ def budgetFilter():
          if row[7] == 'Yes':
             print(row)   
          
-budgetFilter()
-
 def myFilter():
    with open(INPUT,'r') as r:
       csvReader = csv.reader(r)
@@ -105,9 +122,14 @@ def myFilter():
          if availableRooms(int(row[2])):
             print(row)
             
-myFilter()
 
-
+if __name__ == '__main__':
+   print('Adding the budget column')
+   withinBudget(200000)
+   print('Houses under my budget')
+   budgetFilter()
+   print('Houses with 3 rooms or less')
+   myFilter()
 
 
 

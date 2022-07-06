@@ -11,16 +11,19 @@ def sysModule():
    print(f'This is the first arguement pass: {first}')
    print(f'This is the second arguement pass: {second}')
 
-# Introducing csv module
+'''
+Introducing csv module
 
-FILE = f'Sample-CSV/{sys.argv[1]}'
-
-# Simple csv reader in function
+Simple csv reader in function:
+'''
 def csvModule():
+   FILE = f'Sample-CSV/{sys.argv[1]}'
    with open(FILE, 'r') as f:
       csvFile = csv.reader(f)
       for row in csvFile:
          print(row)
+
+
 '''
 Task: Create function that will read and print a csv from Sample-CSV 
 - Pass one of the sample csvs with sys argv
@@ -33,7 +36,6 @@ def printFile(file):
          if len(row) > 1:
             print(row)
 
-# printFile(FILE)
 
 '''
 ['   41', '    9', '   35', ' "N"', '     81', '   14', '   23', ' "W"', ' "Ravenna"', ' OH ']
@@ -53,7 +55,6 @@ def cleanOutput(file):
             row[i] = row[i].strip().strip('"')
          print(row)
 
-#cleanOutput(FILE)
 
 '''
 ['133', '145', '26', '7', '3', '1', '42', '0.36', '3059']
@@ -66,11 +67,12 @@ def loopThru(row):
    for i in range(len(row)):
       cleanRow.append(row[i].strip().strip('"'))
    return cleanRow
-   
-OUTPUT = f'Output-CSV/{sys.argv[2]}'
 
-def cleanToFile(clean, output):
-   with open(clean, 'r') as csvRead:
+FILE = f'Sample-CSV/{sys.argv[1]}'
+CLEANED = f'Input-CSV/{sys.argv[2]}'
+
+def cleanToFile(input, output):
+   with open(input, 'r') as csvRead:
       with open(output, 'w') as csvWrite:
       
          csvToClean = csv.reader(csvRead)
@@ -83,4 +85,6 @@ def cleanToFile(clean, output):
             print(cleanRow)
             csvToWrite.writerow(cleanRow)
 
-cleanToFile(FILE, OUTPUT)
+if __name__ == '__main__':
+   print('Hello, World!')
+   cleanToFile(FILE, CLEANED)
