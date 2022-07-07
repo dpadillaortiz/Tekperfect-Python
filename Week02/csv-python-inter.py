@@ -27,13 +27,13 @@ zillow.csv has 7 headers
 '''
 
 def withinBudget(price, budget):
-   assert type(price) == type(budget) == type(20)
+   assert type(price) == type(budget) == type(20), 'non int was passed to `withinBudget`'
    if price <= budget:
       return True
 
 def budget(budget):
    updatedRows = []
-   
+   assert type(budget) == type(20), 'non int was passed to `budget`'
    with open(INPUT, 'r') as f:
       csvReader = csv.reader(f)
       for row in csvReader:
@@ -60,14 +60,17 @@ Syntax: =CONCATENATE(text1, text2, ...)
 '''
 
 def fullname(first, last):
+   assert type(first) == type(last) == type(''), 'non str was passed to `fullname`'
    fullname = f'{first} {last}'
    return fullname
 
 def username(f_initial, last_name):
+   assert type(f_initial) == type(last_name) == type(''), 'non str was passed to `username`'
    user = f_initial + last_name
    return user
 
 def email(user):
+   assert type(user) == type(''), 'non str was passed to `email`'
    email = f'{user}@tekperfect.com'
    return email
 
