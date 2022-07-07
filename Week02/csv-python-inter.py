@@ -25,39 +25,34 @@ Syntax: =IF(logical test, value if true, value if false)
 
 zillow.csv has 7 headers
 '''
-def budget(budget):
-   with open(INPUT, 'r') as f:
-      with open(OUTPUT, 'w') as c:
-         csvReader = csv.reader(f)
-         csvWriter = csv.writer(c)
-         for row in csvReader:
-            if 'Index' in row:
-               csvWriter.writerow(row + ['Within Budget'])
-               continue
-            if int(row[6]) <= int(budget):
-               csvWriter.writerow(row + ['Yes'])
-            else:
-               csvWriter.writerow(row + ['No'])
 
-def budget(price, budget):
-   if int(price) <= budget:
+def withinBudget(price, budget):
+   assert type(price) == type(budget) == type(20)
+   if price <= budget:
       return True
 
-def withinBudget(budget):
-   with open(INPUT, 'r') as r:
-      with open(OUTPUT, 'w') as w:
-         csvReader = csv.reader(f)
-         csvWriter = csv.writer(c)
-         for row in csvReader:
-            if 'Index' in row:
-               csvWriter.writerow(row + ['Within Budget'])
-               continue
-            if budget(row[6], budget):
-               csvWriter.writerow(row + ['Yes'])
-            else:
-               csvWriter.writerow(row + ['No'])
+def budget(budget):
+   updatedRows = []
+   
+   with open(INPUT, 'r') as f:
+      csvReader = csv.reader(f)
+      for row in csvReader:
+         if 'Index' in row:
+            updatedRows.append(row + ['Within Budget'])
+            continue
+         listingPrice = int(row[6]) 
+         if withinBudget(listingPrice, budget):
+            updatedRows.append(row + ['Yes'])
+         else:
+            updatedRows.append(row + ['No'])
+   
+   for row in updatedRows:
+      print(row)
 
-
+   with open(OUTPUT, 'w') as f:
+      csvWriter = csv.writer(f)
+      csvWriter.writerows(updatedRows)
+   
 
 '''
 CONCATENATE function
@@ -95,6 +90,7 @@ def employee():
 FILTER funciton
 Syntax: =FILTER(array, include, if empty)
 '''
+'''
 def withinBudget(budget):
    if budget == 'Yes':
       print(budget)
@@ -122,14 +118,14 @@ def myFilter():
          if availableRooms(int(row[2])):
             print(row)
             
-
+'''
 if __name__ == '__main__':
    print('Adding the budget column')
-   withinBudget(200000)
-   print('Houses under my budget')
+   budget(200000)  
+   #print('Houses under my budget')
    #budgetFilter()
-   print('Houses with 3 rooms or less')
-   myFilter()
+   #print('Houses with 3 rooms or less')
+   #myFilter()
 
 
 
