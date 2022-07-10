@@ -67,68 +67,85 @@ def fullname(first, last):
 def username(f_initial, last_name):
    assert type(f_initial) == type(last_name) == type(''), 'non str was passed to `username`'
    user = f_initial + last_name
-   return user
+   return user.lower()
 
 def email(user):
    assert type(user) == type(''), 'non str was passed to `email`'
    email = f'{user}@tekperfect.com'
-   return email
+   return email.lower()
 
+# Introducing enumerate()
 def employee():
-   with open(INPUT,'r') as r:
-      with open(OUTPUT,'w') as w:
-         csvReader = csv.reader(r)
-         csvWriter = csv.writer(w)
-    
-         for index, row in enumerate(csvReader):
-            name = fullname(row[0], row[1])
-            user = username(name[0], row[1]).lower()
-            mail = email(user)
-            if index == 0:
-               csvWriter.writerow(row)
-            else:
-               csvWriter.writerow(row + [name, user, mail])
+   updatedRows = []
+   with open(INPUT, 'r') as f:
+      csvReader = csv.reader(f)
+      for line, row in enumerate(csvReader):
+         if line == 0:
+            updatedRows.append(row)
+         else:
+            first = row[0]
+            last = row[1]
+            user = username(first[0], last)
+            newData = [fullname(first, last), user, email(user)]
+            updatedRows.append(row + newData)
+   for row in updatedRows:
+      print(row)
+   with open(OUTPUT, 'w') as f:
+      csvWriter = csv.writer(f)
+      csvWriter.writerows(updatedRows)
+
    
 '''
 FILTER funciton
 Syntax: =FILTER(array, include, if empty)
 '''
-'''
-def withinBudget(budget):
-   if budget == 'Yes':
-      print(budget)
 
-def availableRooms(rooms):
-   desiredRooms = 3
-   if rooms <= desiredRooms:
+def budgetFilter(within_budget):
+   if within_budget == 'Yes':
       return True
 
-def budgetFilter(withinBudget):
-   with open(INPUT,'r') as r:
-      csvReader = csv.reader(r)
-      for index,row in enumerate(csvReader):
-         if index == 0:
-            continue
-         if withinBudget == 'Yes':
-            print(row)   
-         
-def myFilter():
-   with open(INPUT,'r') as r:
-      csvReader = csv.reader(r)
-      for index, row in enumerate(csvReader):
-         if index == 0:
-            continue
-         if availableRooms(int(row[2])):
+def roomFilter(listing_rooms, min_rooms = None, max_rooms = None):
+   if max_rooms != None:
+      if listing_rooms < min_rooms or listing_rooms > max_rooms:
+         return False
+   elif listing_rooms < min_rooms:
+      return False
+   else:
+      return True
+   
+def applyBudgetFilter():
+   with open(OUTPUT, 'r') as f:
+      csvReader = csv.reader(f)
+      for line, row in enumerate(csvReader):
+         budgetCol = row[7]
+         if line == 0:
             print(row)
-            
-'''
+         elif budgetFilter(budgetCol):
+            print(row)
+          
+def applyRoomFilter(min = None, max = None):
+   with open(INPUT, 'r') as f:
+      csvReader = csv.reader(f)
+      for line, row in enumerate(csvReader):
+         listingRooms = row[2]
+         if line == 0:
+            print(row)
+         elif max != None:
+            if roomFilter(int(listingRooms), int(min), int(max)):
+               print(row)
+         elif roomFilter(int(listingRooms), int(min)):
+            print(row)
+           
+
 if __name__ == '__main__':
    print('Adding the budget column')
    budget(200000)  
-   #print('Houses under my budget')
-   #budgetFilter()
-   #print('Houses with 3 rooms or less')
-   #myFilter()
+   #print('Employee Info')
+   #employee()
+   print('Houses under my budget')
+   applyBudgetFilter()
+   print('Houses with 3 rooms or less')
+   applyRoomFilter(3)
 
 
 
