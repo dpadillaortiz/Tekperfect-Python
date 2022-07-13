@@ -1,96 +1,65 @@
-#!/usr/local/bin/python3
+#! /usr/bin/python3
 
-import sys
 import csv
-
-#INPUT = f'Input-CSV/{sys.argv[1]}'
-#OUTPUT = f'Output-CSV/{sys.argv[2]}'
+import sys
+import csv_python_basic as cpb
 
 def printFile(file):
-   with open(file, 'r') as f:
-      reader = csv.reader(f)
-      for row in reader:
+   with open(file, 'r') as csvFile:
+      csvData = csv.reader(csvFile)
+      for row in csvData:
+         if len(row) > 1:
+            print(row)
+
+
+'''
+['   41', '    9', '   35', ' "N"', '     81', '   14', '   23', ' "W"', ' "Ravenna"', ' OH ']
+
+This is the current output. We need to clean up the extra spaces.
+
+Task: Remove the extra spacing from the start and end of each item
+- Clean up any additional fluff
+'''
+def cleanOutput(file):
+   with open(file, newline='') as csvFile:
+      csvData = csv.reader(csvFile)
+      for row in csvData:
+         if len(row) <= 1:
+            continue
+         for i in range(len(row)):
+            row[i] = row[i].strip().strip('"')
          print(row)
-def test_print_file(file):
-   printFile(file)
 
-def writeOneRow(file, mode, row):
-   with open(file, mode) as f:
-      writer = csv.writer(f)
-      writer.writerow(row)
-def test_write_one_row(file, mode, row):
-   writeOneRow(file, mode, row)
-   printFile(file)
 
-def writeManyRows(file, mode, rows):
-   with open(file, mode) as f:
-      writer = csv.writer(f)
-      writer.writerows(rows)
-def test_write_many_rows(file, mode, rows):
-   writeManyRows(file, mode, rows)
-   printFile(file)
+'''
+['133', '145', '26', '7', '3', '1', '42', '0.36', '3059']
 
-def concatenate(*args):
-   new = ''
-   for word in args:
-      assert type(word) == type(new), f'{word} is not a string'
-      new += word
-   return new
-def test_concatenate(*args):
-   c = concatentate(*args)
-   print(c)
+This output has been cleaned up. Let's change it so that it writes to a file
+'''
 
-def left(word, pos):
-   assert type(word) == type(''), f'{word} is not a string'
-   leftSide = word[:pos]
-   return leftSide
-def test_left(word, pos):
-   l = left(word, pos)
-   print(l)
+def loopThru(row):
+   cleanRow = []
+   for i in range(len(row)):
+      cleanRow.append(row[i].strip().strip('"'))
+   return cleanRow
 
-def right(word, pos):
-   assert type(word) == type(''), f'{word} is not a string'
-   rightSide = word[(pos-1):]
-   return rightSide
-def test_right(word, pos):
-   r = right(word, pos)
-   print(r)
+FILE = f'Sample-CSV/{sys.argv[1]}'
+CLEANED = f'Input-CSV/{sys.argv[2]}'
 
-def trim(word):
-   assert type(word) == type(''), f'{word} is not a string'
-   return word.strip()
-def test_trim(word):
-   t = trim(word)
-   print(t)
-
-def unique(array):
-   assert type(array) == type([]), f'{array} is not a list'
-   return set(array)
-def test_unique(array):
-   u = unique(array)
-   print(u)
-
-def sort(array, order):
-   assert type(array) == type([]), f'{array} is not a list'
-   assert type(order) == type(''), f'{order} is not a str'
-   assert order.lower() in ['a', 'd'], f'Order must be "a" for ascending or "b" for descending'
-   if order.lower() == 'a':
-      array.sort()
-      return array
-   else:
-      array.sort(reverse=True)  
-      return array
-def test_sort(array, order):
-   s = sort(array, order)
-   print(s)
+def cleanToFile(input, output):
+   with open(input, 'r') as csvRead:
+      with open(output, 'w') as csvWrite:
+      
+         csvToClean = csv.reader(csvRead)
+         csvToWrite = csv.writer(csvWrite)
+         
+         for row in csvToClean:
+            if len(row) <= 1:
+               continue
+            cleanRow = loopThru(row)
+            print(cleanRow)
+            csvToWrite.writerow(cleanRow)
 
 if __name__ == '__main__':
-   print('Testing unique')
-   toBeUnique = ['a','a','apple','mate',1,1]
-   test_unique(toBeUnique)
-
-   print('Testing sort')
-   toBeSorted = ['star', 'wars', 'darth', 'vader']
-   test_sort(toBeSorted, 'a')
-   test_sort(toBeSorted, 'd')
-   
+   print('Hello, World!')
+   cleanToFile(FILE, CLEANED)

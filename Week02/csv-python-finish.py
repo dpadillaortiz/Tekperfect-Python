@@ -2,6 +2,7 @@
 
 import sys
 import csv
+import csv_python_medium as cpm
 
 '''
 Simple csv writer
