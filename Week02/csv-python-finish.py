@@ -3,8 +3,8 @@
 import sys
 import csv
 
-INPUT = f'Input-CSV/{sys.argv[1]}'
-OUTPUT = f'Output-CSV/{sys.argv[2]}'
+#INPUT = f'Input-CSV/{sys.argv[1]}'
+#OUTPUT = f'Output-CSV/{sys.argv[2]}'
 
 def printFile(file):
    with open(file, 'r') as f:
@@ -22,26 +22,23 @@ def writeManyRows(file, mode, rows):
       writer = csv.writer(f)
       writer.writerows(rows)
 
+def concatenate(*args):
+   new = ''
+   for word in args:
+      assert type(word) == type(new), f'{word} is not a string'
+      new += word
+   return new
 
-def withinBudget(price, budget):
-   assert type(price) == type(budget) == type(20), 'non int was passed to `withinBudget`'
-   if price <= budget:
-      return True
+def left(word, pos):
+   assert type(word) == type(''), f'{word} is not a string'
+   new = word[:pos]
+   return new
 
-def fullname(first, last):
-   assert type(first) == type(last) == type(''), 'non str was passed to `fullname`'
-   fullname = f'{first} {last}'
-   return fullname
+def right(word, pos):
+   assert type(word) == type(''), f'{word} is not a string'
+   new = word[(pos-1):]
+   return new
 
-def username(f_initial, last_name):
-   assert type(f_initial) == type(last_name) == type(''), 'non str was passed to `username`'
-   user = f_initial + last_name
-   return user.lower()
-
-def email(user):
-   assert type(user) == type(''), 'non str was passed to `email`'
-   email = f'{user}@tekperfect.com'
-   return email.lower()
 
 def budgetFilter(within_budget):
    if within_budget == 'Yes':
@@ -50,8 +47,12 @@ def budgetFilter(within_budget):
           
 
 if __name__ == '__main__':
-
-
+   c = concatenate('w','e','MEME')
+   print(c)
+   l = left('California', 3)
+   print(l)
+   r = right('California', 3)
+   print(r)
 
 
 
