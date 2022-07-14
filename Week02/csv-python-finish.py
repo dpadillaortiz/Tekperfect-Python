@@ -8,7 +8,7 @@ import csv_python_basic as cpb
 IF function
 Syntax: =IF(logical test, value if true, value if false)
 '''
-def budgetFilter(within_budget):
+def budgetFilterde(within_budget):
    if within_budget == 'Yes':
       return True
 
@@ -25,22 +25,31 @@ def withinBudget(price, budget):
    if price <= budget:
       return True
 
-
+def budgetFilter(file, budget):
+   assert type(budget) == type(20), 'non int was passed to `budget`'
+   with open(file, 'r') as f:
+      reader = csv.reader(f)
+      for index, row in enumerate(reader):
+         budgetCol = row[-1]
+         if index == 0:
+            print(row)
+         elif budgetCol == 'Yes':
+            print(row)
+   
 def budget(file, budget):
    assert type(budget) == type(20), 'non int was passed to `budget`'
-   budgetColumn = []
+   updatedRows = []
    with open(file, 'r') as f:
       reader = csv.reader(f)
       for index, row in enumerate(reader):
          listingPrice = row[-1]
          if index == 0:
-            budgetColumn.append('Within Budget')
+            updatedRows.append(row + ['Within Budget'])
          elif withinBudget(int(listingPrice), budget):
-            budgetColumn.append('Yes')
+            updatedRows.append(row + ['Yes'])
          else:
-            budgetColumn.append('No')
-   print(budgetColumn)
-   cpb.writeOneRow(file, 'a', budgetColumn)
+            updatedRows.append(row + ['No'])
+   cpb.writeManyRows(file, 'w', updatedRows)
 
 
 '''
@@ -123,15 +132,9 @@ if __name__ == '__main__':
    path = f'{outputDir}{sys.argv[1]}'
    print('Adding the budget column')
    budget(path,200000)  
-   cpb.readFile(path)   
-   #print('Employee Info')
-   #employee()
-   #print('Houses under my budget')
-   #applyBudgetFilter()
-   #print('Houses with 3 rooms or less')
-   #applyRoomFilter(1,3)
-
-
+   cpb.readFile(path)
+   print('Filter only budget houses')
+   budgetFilter(path, 2000)
 
 
 
