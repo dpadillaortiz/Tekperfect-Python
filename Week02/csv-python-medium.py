@@ -5,10 +5,6 @@ import sys
 import csv_python_basic as cpb
 
 
-inputDir = 'Input-CSV/'
-outputDir = 'Output-CSV/'
-sampleDir = 'Sample-CSV/'
-
 '''
 Let's print one of the files we have
 In the main function:
@@ -61,6 +57,10 @@ def cleanRow(row):
    return row
 
 if __name__ == '__main__':
+   inputDir = 'Input-CSV/'
+   outputDir = 'Output-CSV/'
+   sampleDir = 'Sample-CSV/'
+
    path = f'{sampleDir}{sys.argv[1]}'
    print("Original File")
    cpb.readFile(path)
