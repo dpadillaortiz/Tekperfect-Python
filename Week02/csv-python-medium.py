@@ -69,6 +69,6 @@ if __name__ == '__main__':
    clean(path)
 
    print("Writing to new file")
-   writeClean(path, f'{outputDir}{sys.argv[2]}')
+   writeClean(path, f'{inputDir}{sys.argv[2]}')
    print('Printing the new file')
-   cpb.readFile(f'{outputDir}{sys.argv[2]}')
+   cpb.readFile(f'{inputDir}{sys.argv[2]}')
