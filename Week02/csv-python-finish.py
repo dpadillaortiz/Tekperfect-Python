@@ -62,7 +62,27 @@ def main():
       writer.writerows(updatedRows)
    cpb.readFile(f'{outputDir}{sys.argv[2]}')
 
+def bonus_dict_reader():
+   outputDir = 'Output-CSV/'
+   with open(f'{outputDir}{sys.argv[1]}', 'r') as f:
+      reader = csv.DictReader(f)
+      for row in reader:
+         print(row)
+
+def bonus_dict_write_row():
+   outputDir = 'Output-CSV/'
+   with open(f'{outputDir}{sys.argv[1]}', 'a') as f:
+      fieldnames = ['First Name', 'Last Name', 'Department', 'Full Name', 'Username', 'Email Group']
+      writer = csv.DictWriter(f, fieldnames=fieldnames)
+      writer.writerow({'First Name': 'test', 'Last Name': 'test', 'Department': 'test', 'Full Name': 'test', 'Username': 'test', 'Email Group': 'test@tekperfect.com'})
+
+def bonus_print_file():
+   outputDir = 'Output-CSV/'
+   cpb.readFile(f'{outputDir}{sys.argv[1]}')
 
 if __name__ == '__main__':
-   main()
-
+   #main()
+   bonus_dict_reader()
+   bonus_dict_write_row()
+   bonus_dict_reader()
+   bonus_print_file()
