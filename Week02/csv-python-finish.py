@@ -36,7 +36,8 @@ def add_emp_info(first, last):
    first_initial = cpb.left(first, 1)
    username = Employee().username(first_initial, last)
    email = Employee().email(username)
-   return [fullname, username, email]
+   group = Employee().email_group('IT')
+   return [fullname, username, email, group]
 
 def main():
    inputDir = 'Input-CSV/'
@@ -82,7 +83,9 @@ def bonus_print_file():
 
 if __name__ == '__main__':
    #main()
-   bonus_dict_reader()
-   bonus_dict_write_row()
-   bonus_dict_reader()
-   bonus_print_file()
+   #bonus_dict_reader()
+   #bonus_dict_write_row()
+   #bonus_dict_reader()
+   #bonus_print_file()
+   x = add_emp_info('Daniel', 'Padilla')
+   print(x)
